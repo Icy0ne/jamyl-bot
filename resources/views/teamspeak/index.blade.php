@@ -12,6 +12,12 @@
 				        @endif
 						<div class="row">
 		                    <div class="col-sm-2">
+		                    	<strong>TeamSpeak Address</strong>
+		                    </div>
+		                    <div class="col-sm-10">{{ config('ts3.hostname') }}</div>
+						</div>
+						<div class="row">
+		                    <div class="col-sm-2">
 		                    	<strong>Nickname to Use</strong>
 		                    </div>
 		                    <div class="col-sm-10">{{ $user }}</div>
