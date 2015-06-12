@@ -25,6 +25,12 @@
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->slack_name }}</td>
                                         <td>
+                                            {!! Form::open(['action' => ['UserController@postIndex'], 'method' => 'post']) !!}
+                                            {!! Form::hidden('user_id', $user->id) !!}
+                                            {!! Form::submit('Refresh TS') !!}
+                                            {!! Form::close() !!}
+                                        </td>
+                                        <td>
                                             @unless ($user->admin)
                                                 {!! Form::open(['action' => ['UserController@deleteIndex'], 'method' => 'delete']) !!}
                                                 {!! Form::hidden('user_id', $user->id) !!}

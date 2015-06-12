@@ -36,9 +36,18 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/') }}">Home</a></li>
+					@if (!Auth::guest())
+						<li><a href="{{ url('/teamspeak') }}">TeamSpeak</a></li>
+					@endif
                     @if (\Auth::user()->admin)
-                        <li><a href="{{ url('admin/groups') }}">Group admin</a></li>
-                        <li><a href="{{ url('admin/users') }}">User admin</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ url('admin/groups') }}">Groups</a></li>
+                        <li><a href="{{ url('admin/users') }}">Users</a></li>
+                        <li><a href="{{ url('admin/teamspeak') }}">TeamSpeak</a></li>
+                        </ul>
+                        </li>
                     @endif
 				</ul>
 

@@ -124,6 +124,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * @return string
+     */
+    public function getTSName()
+    {
+    	return $this->char_name;
+    }
+
+    /**
      *
      */
     public static function updateAll()

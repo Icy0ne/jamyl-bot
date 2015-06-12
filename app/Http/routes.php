@@ -19,7 +19,11 @@ Route::group(['domain' => env('SLACK_DOMAIN', 'localhost')], function() {
     Route::get('/', 'WelcomeController@index');
 
     Route::get('home', 'HomeController@index');
-
+    
+    Route::get('teamspeak', 'TeamSpeakController@index');
+    Route::post('teamspeak/register', 'TeamSpeakController@register');
+    Route::post('teamspeak/updateaccess', 'TeamSpeakController@updateAccess');
+    
     Route::get('auth/login', 'AuthController@redirectToProvider');
 
     Route::get('auth/logout', function () {

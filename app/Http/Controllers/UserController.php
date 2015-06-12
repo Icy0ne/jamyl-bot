@@ -5,6 +5,7 @@ use JamylBot\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use JamylBot\User;
+use JamylBot\Userbot\TS3Monkey;
 
 class UserController extends Controller {
 
@@ -25,7 +26,17 @@ class UserController extends Controller {
         $user->delete();
         return redirect('/admin/users');
     }
-
+    
+    public function postIndex()
+    {
+    	// Delete user $id
+    	$id = \Request::input('user_id');
+    	$user = User::find($id);
+    	$teamspeak=new TS3Monkey();
+    	$teamspeak->updateAccess($user);
+    	return redirect('/admin/users');
+    }
+    
     public function getPending()
     {
         // List users who have entered an email but have not registered on slack.
