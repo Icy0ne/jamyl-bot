@@ -51,6 +51,7 @@ class Kernel extends ConsoleKernel {
         $schedule->command('auth:refreshgrouppermissions')->everyFiveMinutes();
         $schedule->command('ts3:checknickames')->everyFiveMinutes();
         $schedule->command('ts3:updateaccess')->everyFiveMinutes();
+        $schedule->command('ts3:checknicknames')->everyFiveMinutes();
         //$schedule->command('ts3:getgroups')->twiceDaily();
 	}
 
