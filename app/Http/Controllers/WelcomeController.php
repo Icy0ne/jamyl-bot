@@ -29,7 +29,11 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('welcome');
+	    if (env('WEB_CUSTOM_WELCOME')) {
+            return view('welcome_custom');
+	    } else {
+            return view('welcome');
+	    }
 	}
 
     /**
