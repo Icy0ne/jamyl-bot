@@ -4,8 +4,6 @@
 
 .idea
 
-config/standings.php
-
 dump.rdb
 
 public/favicon.ico
@@ -51,3 +49,4 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
+composer.phar
