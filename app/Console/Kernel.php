@@ -26,6 +26,9 @@ class Kernel extends ConsoleKernel {
         'JamylBot\Console\Commands\GetAlliances',
         'JamylBot\Console\Commands\GetContactLists',
 	    'JamylBot\Console\Commands\RefreshGroupPermissions',
+	    'JamylBot\Console\Commands\GetTeamSpeakGroups',
+	    'JamylBot\Console\Commands\UpdateTeamSpeakAccess',
+        'JamylBot\Console\Commands\CheckTeamSpeakNickames',
 	];
 
 	/**
@@ -45,6 +48,10 @@ class Kernel extends ConsoleKernel {
         $schedule->command('api:getalliances')->dailyAt('00:01');
         $schedule->command('api:getcontactlists')->twiceDaily();
         $schedule->command('api:getcorporations')->everyFiveMinutes();
+        $schedule->command('auth:refreshgrouppermissions')->everyFiveMinutes();
+        $schedule->command('ts3:checknickames')->everyFiveMinutes();
+        $schedule->command('ts3:updateaccess')->everyFiveMinutes();
+        //$schedule->command('ts3:getgroups')->twiceDaily();
 	}
 
 }
