@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>JamylBot Slack Manager</title>
+		<title>{{ env('WEB_PAGE_TITLE') }}</title>
 		
 		<link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
 
@@ -41,7 +41,7 @@
 	<body>
 		<div class="container">
 			<div class="content">
-				<div class="title">ProviBloc Slack</div>
+				<div class="title">{{ env('WEB_WELCOME_TITLE') }}</div>
 				<div class="quote">Login with EVE to get a slack invite.</div>
                 <div><a href="auth/login"><img src="images/EVE_SSO_Login_Buttons_Large_White.png", alt="Login with EVE SSO"></a></div>
 			</div>
