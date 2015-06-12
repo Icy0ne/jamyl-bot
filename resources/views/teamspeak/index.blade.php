@@ -11,23 +11,23 @@
 				        	<div class="alert alert-danger col-md-12" role="alert">{{ $error }}</div>
 				        @endif
 						<div class="row">
-		                    <div class="col-sm-2">
+		                    <div class="col-sm-3 text-right">
 		                    	<strong>TeamSpeak Address</strong>
 		                    </div>
-		                    <div class="col-sm-10">{{ config('ts3.hostname') }}</div>
+		                    <div class="col-sm-7">{{ config('ts3.hostname') }}</div>
 						</div>
 						<div class="row">
-		                    <div class="col-sm-2">
+		                    <div class="col-sm-3 text-right">
 		                    	<strong>Nickname to Use</strong>
 		                    </div>
-		                    <div class="col-sm-10">{{ $user }}</div>
+		                    <div class="col-sm-7">{{ $user }}</div>
 						</div>
 						<div class="row">
-		                    <div class="col-sm-2">
+		                    <div class="col-sm-3 text-right">
 		                    	<strong>TeamSpeak UID</strong>
 		                    </div>
 		                    <div class="col-sm-4">{{ $tsuid }} </div>
-		                    <div class="col-sm-6">
+		                    <div class="col-sm-5">
 								@if ($tsuid!="")
 			                 		{!! Form::open(['action' => ['TeamSpeakController@register'], 'method' => 'post']) !!}
 				                    {!! Form::submit('Refresh TS UID') !!}
@@ -36,7 +36,7 @@
 		                    </div>
                     	</div>	
 						<div class="row">
-		                    <div class="col-sm-offset-2 col-sm-2">
+		                    <div class="col-sm-offset-3 col-sm-2">
 								@if ($tsuid=="")
 		    	                    {!! Form::open(['action' => ['TeamSpeakController@register'], 'method' => 'post']) !!}
 		                            {!! Form::submit('Register') !!}
