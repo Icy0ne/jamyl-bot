@@ -43,7 +43,7 @@ class CheckTeamSpeakNickames extends Command {
 			$users=User::where("tsdbid", "=", $currentuser["client_database_id"])->get();
 			foreach ($users as $user) {
 				if ($user->getTSName()!=$currentuser["client_nickname"]) {
-				$teamspeak->clientPoke($currentuser["client_database_id"], "Wrong Nickname - Excpecting ".$user->getTSName());
+				$teamspeak->clientPoke($currentuser["client_database_id"], "Wrong Nickname - Expecting ".$user->getTSName());
 				}
 			}
 		}
