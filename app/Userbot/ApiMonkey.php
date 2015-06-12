@@ -42,7 +42,7 @@ class ApiMonkey {
      */
     function __construct(Userbot $userbot)
     {
-        $this->pheal = new Pheal();
+        $this->pheal = new Pheal(config('eve.api_keyid'), config('eve.api_vcode'));
         $this->userbot = $userbot;
         if (env('PHEAL_CACHE') == 'database') {
             $dbSettings = config('database.connections.mysql');
