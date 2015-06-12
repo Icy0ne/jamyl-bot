@@ -14,7 +14,7 @@
 		                    <div class="col-sm-3 text-right">
 		                    	<strong>TeamSpeak Address</strong>
 		                    </div>
-		                    <div class="col-sm-7">{{ config('ts3.hostname') }}</div>
+		                    <div class="col-sm-7"><a href="ts3server://{{ config('ts3.hostname') }}?port={{ config('ts3.serverport') }}&nickname={{ $user }}">{{ config('ts3.hostname') }}</a> (click to join)</div>
 						</div>
 						<div class="row">
 		                    <div class="col-sm-3 text-right">
