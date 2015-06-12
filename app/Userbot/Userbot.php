@@ -28,7 +28,11 @@ class Userbot {
      * @var SlackMonkey
      */
     protected $slackMonkey;
-
+    /**
+     * @var TS3Monkey
+     */
+    protected $ts3Monkey;
+    
     /**
      *
      */
@@ -36,6 +40,7 @@ class Userbot {
     {
         $this->apiMonkey = new ApiMonkey($this);
         $this->slackMonkey = new SlackMonkey();
+        $this->ts3Monkey = new TS3Monkey();
     }
 
     /**
@@ -60,7 +65,7 @@ class Userbot {
         $this->apiMonkey->sendSingleAffiliation($charId);
     }
 
-    /**
+   /**
      * @param $phealResults
      */
     public function updateAffiliations($phealResults)
