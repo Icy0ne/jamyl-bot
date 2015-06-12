@@ -18,6 +18,11 @@ class Group extends Model {
 		return $this->belongsToMany('JamylBot\Channel');
 	}
 
+	public function tsgroups()
+	{
+		return $this->belongsToMany('JamylBot\TeamSpeakGroup');
+	}
+
 	public function getOwners()
 	{
 		return explode(',', $this->owners);
