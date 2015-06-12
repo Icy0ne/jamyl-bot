@@ -37,6 +37,49 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>Linked TS Groups</td>
+                                    <td>
+                                        @foreach ($tsgroups as $tsgroup)
+                                            <div>
+                                                {!! Form::open(['url' => 'admin/groups/'.$id.'/remove-tsgroup']) !!}
+                                                {{ $tsgroup->name }}
+                                                {!! Form::hidden('tsgroup', $tsgroup->id) !!}
+                                                {!! Form::submit('Remove') !!}
+                                                {!! Form::close() !!}
+                                            </div>
+                                        @endforeach
+                                        <div>
+                                            {!! Form::open(['url' => 'admin/groups/'.$id.'/add-tsgroup']) !!}
+                                            {!! Form::select('tsgroup', $menuTSGroups) !!}
+                                            {!! Form::submit('Add group') !!}
+                                            {!! Form::close() !!}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                <td>Corp ID</td>
+                                	<td>
+                                		<div>
+											{!! Form::open(['url' => 'admin/groups/'.$id.'/save-corpid']) !!}
+					                        {!! Form::text('corp_id', $corp_id) !!}
+					                        {!! Form::submit('Save') !!}
+					                        {!! Form::close() !!}
+				                        </div>
+                        	        </td>
+                                </tr>
+                                <tr>
+                                <td>Alliance ID</td>
+                                	<td>
+                                		<div>
+											{!! Form::open(['url' => 'admin/groups/'.$id.'/save-allianceid']) !!}
+					                        {!! Form::text('alliance_id', $alliance_id) !!}
+					                        {!! Form::submit('Save') !!}
+					                        {!! Form::close() !!}
+				                        </div>
+                        	        </td>
+
+                                </tr>
                             </table>
                         </div>
                         <div class="col-sm-6">

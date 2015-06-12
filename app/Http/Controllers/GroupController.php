@@ -7,7 +7,7 @@ use JamylBot\Group;
 use JamylBot\Http\Requests;
 use JamylBot\Http\Controllers\Controller;
 use JamylBot\User;
-
+use JamylBot\TeamSpeakGroup;
 
 class GroupController extends Controller {
 
@@ -110,7 +110,14 @@ class GroupController extends Controller {
         foreach ($notOwners as $owner) {
             $menuOwners[$owner->id] = $owner->char_name;
         }
-
+        $otherTSGroups = TeamSpeakGroup::all();
+        $menuTSGroups = [];
+        foreach ($group->tsgroups as $channel) {
+            $otherTSGroups = $otherTSGroups->except($channel->id);
+        }
+        foreach ($otherTSGroups as $channel) {
+            $menuTSGroups[$channel->id] = $channel->name;
+        }
         return view('admin.groups.show', 
             [
                 'id' => $group->id,
@@ -123,7 +130,9 @@ class GroupController extends Controller {
                 'owners' => $owners,
                 'menuOwners' => $menuOwners,
                 'corp_id' => $group->corp_id,
-                'alliance_id' => $group->alliance_id
+                'alliance_id' => $group->alliance_id,
+                'menuTSGroups' => $menuTSGroups,
+                'tsgroups' => $group->tsgroups
             ]);
     }
 
@@ -255,6 +264,20 @@ class GroupController extends Controller {
          */
         $group = Group::find($groupId);
         $group->setAllianceID(\Request::input('alliance_id'));
+        return redirect('/admin/groups/' . $groupId);
+    }
+
+    public function addTSGroupToGroup($groupId)
+    {
+        $group = Group::find($groupId);
+        $group->tsgroups()->attach(\Request::input('tsgroup'));
+        return redirect('/admin/groups/' . $groupId);
+    }
+
+    public function removeTSGroupFromGroup($groupId)
+    {
+        $group = Group::find($groupId);
+        $group->tsgroups()->detach(\Request::input('tsgroup'));
         return redirect('/admin/groups/' . $groupId);
     }
 }

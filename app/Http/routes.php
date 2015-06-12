@@ -51,6 +51,11 @@ Route::group(['domain' => env('SLACK_DOMAIN', 'localhost')], function() {
         Route::post('groups/{groupId}/remove-owner', 'GroupController@removeOwnerFromGroup')->where(['groupId' => '[0-9]+']);
         Route::post('groups/{groupId}/save-corpid', 'GroupController@saveCorpID')->where(['groupId' => '[0-9]+']);
         Route::post('groups/{groupId}/save-allianceid', 'GroupController@saveAllianceID')->where(['groupId' => '[0-9]+']);
+        Route::post('groups/{groupId}/remove-owner', 'GroupController@removeOwnerFromGroup')->where(['groupId' => '[0-9]+']);
+        Route::post('groups/{groupId}/add-tsgroup', 'GroupController@addTSGroupToGroup')->where(['groupId' => '[0-9]+']);
+        Route::post('groups/{groupId}/remove-tsgroup', 'GroupController@removeTSGroupFromGroup')->where(['groupId' => '[0-9]+']);
+        
+        Route::resource('teamspeak', 'TeamSpeakAdminController');
         
         Route::controller('users', 'UserController');
 
