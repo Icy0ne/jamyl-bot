@@ -19,7 +19,7 @@ class TeamSpeakAdminController extends Controller {
 	{
 
 		// connect to local server, authenticate and spawn an object for the virtual server on port 9987
-		$ts3_VirtualServer = TeamSpeak3::factory ( "serverquery://icyone:sFB0V+LL@46.4.63.104:10011/?server_port=9987" );
+    	$ts3_VirtualServer = TeamSpeak3::factory("serverquery://".config('ts3.username').":".config('ts3.password')."@".config('ts3.hostname').":".config('ts3.serverqueryport')."/?server_port=".config('ts3.serverport'));
 		// query clientlist from virtual server and filter by platform
 		$arr_ClientList = $ts3_VirtualServer->serverGroupList ();
 		// walk through list of clients

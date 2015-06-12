@@ -27,7 +27,7 @@ class TS3Monkey {
      */
     function __construct()
     {
-    	$this->ts3monkey = TeamSpeak3::factory("serverquery://serveradmin:FgDGwzQB@46.4.63.104:10011/?server_port=9987");
+    	$this->ts3monkey = TeamSpeak3::factory("serverquery://".config('ts3.username').":".config('ts3.password')."@".config('ts3.hostname').":".config('ts3.serverqueryport')."/?server_port=".config('ts3.serverport'));
     	//$this->ts3monkey->selfUpdate(["client_nickname"=>"AdminBot".rand(1,1000)]);
     }
     
