@@ -72,6 +72,18 @@ class Userbot {
         }
     }
 
+       /**
+     * @param $phealResults
+     */
+    public function updateCorporations($phealResults)
+    {
+    	foreach ($phealResults->corporations->toArray() as $phealResult) {
+    		$phealResult['cachedUntil'] = $phealResults->cached_until;
+    		$corp = Corp::find($phealResult['corporationID']);
+            $corp->updateCorporation($phealResult);
+    	}
+    }
+
     /**
      * @param $charId
      * @param $error

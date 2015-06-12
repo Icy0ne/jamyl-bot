@@ -43,13 +43,15 @@ Route::group(['domain' => env('SLACK_DOMAIN', 'localhost')], function() {
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
         Route::resource('groups', 'GroupController');
-        Route::post('groups/{groupId}/add-user', 'GroupController@addUserToGroup')->where(['groupId' => '[0-9]+']);
+    	Route::post('groups/{groupId}/add-user', 'GroupController@addUserToGroup')->where(['groupId' => '[0-9]+']);
         Route::post('groups/{groupId}/remove-user', 'GroupController@removeUserFromGroup')->where(['groupId' => '[0-9]+']);
         Route::post('groups/{groupId}/add-channel', 'GroupController@addChannelToGroup')->where(['groupId' => '[0-9]+']);
         Route::post('groups/{groupId}/remove-channel', 'GroupController@removeChannelFromGroup')->where(['groupId' => '[0-9]+']);
         Route::post('groups/{groupId}/add-owner', 'GroupController@addOwnerToGroup')->where(['groupId' => '[0-9]+']);
         Route::post('groups/{groupId}/remove-owner', 'GroupController@removeOwnerFromGroup')->where(['groupId' => '[0-9]+']);
-
+        Route::post('groups/{groupId}/save-corpid', 'GroupController@saveCorpID')->where(['groupId' => '[0-9]+']);
+        Route::post('groups/{groupId}/save-allianceid', 'GroupController@saveAllianceID')->where(['groupId' => '[0-9]+']);
+        
         Route::controller('users', 'UserController');
 
     });

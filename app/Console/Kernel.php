@@ -22,6 +22,10 @@ class Kernel extends ConsoleKernel {
         'JamylBot\Console\Commands\ManageChannels',
         'JamylBot\Console\Commands\ManuallyAddUser',
         'JamylBot\Console\Commands\TrollPunkslap',
+        'JamylBot\Console\Commands\GetCorporations',
+        'JamylBot\Console\Commands\GetAlliances',
+        'JamylBot\Console\Commands\GetContactLists',
+	    'JamylBot\Console\Commands\RefreshGroupPermissions',
 	];
 
 	/**
@@ -38,6 +42,9 @@ class Kernel extends ConsoleKernel {
         $schedule->command('jamyl:manage')->everyFiveMinutes();
         $schedule->command('jamyl:getchannels')->Hourly();
         $schedule->command('jamyl:punk')->dailyAt('10:05');
+        $schedule->command('api:getalliances')->dailyAt('00:01');
+        $schedule->command('api:getcontactlists')->twiceDaily();
+        $schedule->command('api:getcorporations')->everyFiveMinutes();
 	}
 
 }

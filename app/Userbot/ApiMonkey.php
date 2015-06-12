@@ -151,4 +151,19 @@ class ApiMonkey {
         $result = $this->pheal->eveScope->CharacterAffiliation(['ids' => $id]);
         return $result->characters[0]->characterName;
     }
+    public function getCorporationInfo($id)
+    {
+        $result = $this->pheal->corpScope->CorporationSheet(['corporationID' => $id]);
+        return $result;
+    }
+    public function getAllianceList()
+    {
+        $result = $this->pheal->eveScope->AllianceList();
+        return $result;
+    }
+    public function getContactList()
+    {
+        $result = $this->pheal->corpScope->ContactList();
+        return $result;
+    }
 }

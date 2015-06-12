@@ -9,17 +9,27 @@
 
 				<div class="panel-body">
                     <img src="{{$avatar}}" alt="Character Portrait" class="pull-right">
-                    <p>Welcome {{$name}}.</p>
+                    <p>Welcome <strong>{{$name}}</strong>.</p>
                     @if($status == 'holder' || $status == 'blue' || $status == 'light-blue')
                         @if($email)
-                            <p>Your registered email address is {{ $email }}</p>
+                            <p>Your registered email address is <strong>{{ $email }}</strong></p>
                             @if($slackName)
-                                <p>Your Slack username is {{ $slackName }}</p>
+                                <p>Your Slack username is <strong>{{ $slackName }}</strong></p>
                                 <p>&nbsp;</p>
-                                @if($groups && count($groups))
-                                    <h4>You have admin rights on the following groups:</h4>
+                                @if($groupsOwner && count($groupsOwner))
+                                    <h4>You are an admin of the following groups:</h4>
                                     <table class="table">
-                                        @foreach($groups as $group)
+                                        @foreach($groupsOwner as $group)
+                                            <tr>
+                                                <td><a href="/admin/groups/{{$group->id}}">{{ $group->name }}</a></td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+                                @endif
+                                @if($groupsMember && count($groupsMember))
+                                    <h4>You are a member of the following groups:</h4>
+                                    <table class="table">
+                                        @foreach($groupsMember as $group)
                                             <tr>
                                                 <td><a href="/admin/groups/{{$group->id}}">{{ $group->name }}</a></td>
                                             </tr>
@@ -28,16 +38,17 @@
                                 @endif
                             @else
                                 <p>Check your email and follow the instructions to sign up.</p>
-                                <p>Once you are on slack, this system should notice within 5 minutes and give you
-                                    appropriate group access. You can speed this up by typing '/register' on slack.</p>
+                                <p>Once you are on Slack, this system should notice within 5 minutes and give you
+                                    appropriate group access. You can speed this up by typing '/register' on Slack.</p>
                             @endif
                             @else
-                            <p>Enter your email address to receive a slack invite:</p>
+                            <p>Enter your email address to receive a Slack invite, if you already have a Slack account you can use the same email address:</p>
                             {!! Form::open(array('url' => 'form/addEmail')) !!}
                             {!! Form::email('email') !!}
                             {!! Form::submit('Send Slack Invite') !!}
                             {!! Form::close() !!}
-                            <p>If you are already registered on slack, type '/register {{ $charId }}' in slack.</p>
+                            <p></p>
+                            <p>If you are already registered and connected to Slack please type '/register {{ $charId }}' in a channel.</p>
                         @endif
                     @else
                         <p>You do not appear to have the correct standings on this character.</p>
