@@ -8,8 +8,8 @@
                     <div class="panel-heading">Create new group</div>
                     <div class="panel-body">
                         {!! Form::open(['route' => 'admin.groups.store']) !!}
-                        {!! Form::text('name') !!}
-                        {!! Form::submit('Create group') !!}
+                        <div class="col-sm-4">{!! Form::text('name', null, Array('placeholder'=>'Enter group name', 'class'=>'form-control')) !!}</div>
+                        {!! Form::submit('Create group', Array('class'=>'btn btn-success col-sm-2')) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

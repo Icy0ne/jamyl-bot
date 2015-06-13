@@ -8,6 +8,8 @@ use JamylBot\Http\Requests;
 use JamylBot\Http\Controllers\Controller;
 use JamylBot\User;
 use JamylBot\TeamSpeakGroup;
+use JamylBot\Corp;
+use JamylBot\Alliance;
 
 class GroupController extends Controller {
 
@@ -80,7 +82,7 @@ class GroupController extends Controller {
         if ($group == null) {
             abort(404);
         }
-        $otherUsers = User::all();
+        $otherUsers = User::orderBy('char_name')->get();
         $menuUsers = [];
         foreach ($group->users as $user) {
             $otherUsers = $otherUsers->except($user->id);
@@ -88,7 +90,7 @@ class GroupController extends Controller {
         foreach ($otherUsers as $user) {
             $menuUsers[$user->id] = $user->char_name;
         }
-        $otherChannels = Channel::all();
+        $otherChannels = Channel::orderBy('name')->get();
         $menuChannels = [];
         foreach ($group->channels as $channel) {
             $otherChannels = $otherChannels->except($channel->id);
@@ -96,7 +98,7 @@ class GroupController extends Controller {
         foreach ($otherChannels as $channel) {
             $menuChannels[$channel->id] = $channel->name;
         }
-        $notOwners = User::all();
+        $notOwners = User::orderBy('char_name')->get();
         $menuOwners = [];
         $owners = [];
         foreach ($group->getOwners() as $ownerId) {
@@ -118,6 +120,16 @@ class GroupController extends Controller {
         foreach ($otherTSGroups as $channel) {
             $menuTSGroups[$channel->id] = $channel->name;
         }
+        $corporations = Corp::orderBy('name')->get();
+        $menuCorporations = [];
+        foreach ($corporations as $corporation) {
+            $menuCorporations[$corporation->id] = $corporation->name;
+        }
+        $alliances = Alliance::orderBy('name')->get();
+        $menuAlliances = [];
+        foreach ($alliances as $alliance) {
+            $menuAlliances[$alliance->id] = $alliance->name;
+        }
         return view('admin.groups.show', 
             [
                 'id' => $group->id,
@@ -130,7 +142,9 @@ class GroupController extends Controller {
                 'owners' => $owners,
                 'menuOwners' => $menuOwners,
                 'corp_id' => $group->corp_id,
+                'menuCorporations' => $menuCorporations,
                 'alliance_id' => $group->alliance_id,
+                'menuAlliances' => $menuAlliances,
                 'menuTSGroups' => $menuTSGroups,
                 'tsgroups' => $group->tsgroups
             ]);
@@ -201,10 +215,9 @@ class GroupController extends Controller {
         $group = Group::find($groupId);
         $group->users()->detach(\Request::input('user'));
         if (\Request::ajax()) {
-            return \Response::json(
-                array(
-                    'status' => 'ok'
-                ));
+            return \Response::json(array(
+                'status' => 'ok'
+            ));
         }
         return redirect('/admin/groups/' . $groupId);
     }

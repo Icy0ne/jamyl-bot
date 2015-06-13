@@ -7,11 +7,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Info for {{ $name }}</div>
                     <div class="panel-body">
-                        <div class="col-sm-6">
+                        <div class="col-sm-8">
                             <table class="table table-condensed table-bordered">
                                 <tr>
-                                    <td class="col-sm-4">id</td>
-                                    <td class="col-sm-8">{{ $id }}</td>
+                                    <td class="col-sm-3">ID</td>
+                                    <td class="col-sm-9">{{ $id }}</td>
                                 </tr>
                                 <tr>
                                     <td>Name</td>
@@ -23,16 +23,16 @@
                                         @foreach ($channels as $channel)
                                             <div>
                                                 {!! Form::open(['url' => 'admin/groups/'.$id.'/remove-channel']) !!}
-                                                {{ $channel->name }}
+                                                <div class="col-sm-7">{{ $channel->name }}</div>
                                                 {!! Form::hidden('channel', $channel->id) !!}
-                                                {!! Form::submit('Remove') !!}
+                                                <div class="col-sm-5">{!! Form::submit('Remove', Array('class'=>'btn btn-xs btn-danger col-sm-6')) !!}</div>
                                                 {!! Form::close() !!}
                                             </div>
                                         @endforeach
                                         <div>
                                             {!! Form::open(['url' => 'admin/groups/'.$id.'/add-channel']) !!}
-                                            {!! Form::select('channel', $menuChannels) !!}
-                                            {!! Form::submit('Add channel') !!}
+                                             <div class="col-sm-7">{!! Form::select('channel', $menuChannels, null, array('class' => 'form-control input-sm')) !!}</div>
+                                             <div class="col-sm-5">{!! Form::submit('Add', Array('class'=>'btn btn-sm btn-success col-sm-6')) !!}</div>
                                             {!! Form::close() !!}
                                         </div>
                                     </td>
@@ -43,16 +43,16 @@
                                         @foreach ($tsgroups as $tsgroup)
                                             <div>
                                                 {!! Form::open(['url' => 'admin/groups/'.$id.'/remove-tsgroup']) !!}
-                                                {{ $tsgroup->name }}
+                                                <div class="col-sm-7">{{ $tsgroup->name }}</div>
                                                 {!! Form::hidden('tsgroup', $tsgroup->id) !!}
-                                                {!! Form::submit('Remove') !!}
+                                                <div class="col-sm-5">{!! Form::submit('Remove', Array('class'=>'btn btn-xs btn-danger col-sm-6')) !!}</div>
                                                 {!! Form::close() !!}
                                             </div>
                                         @endforeach
                                         <div>
                                             {!! Form::open(['url' => 'admin/groups/'.$id.'/add-tsgroup']) !!}
-                                            {!! Form::select('tsgroup', $menuTSGroups) !!}
-                                            {!! Form::submit('Add group') !!}
+                                            <div class="col-sm-7">{!! Form::select('tsgroup', $menuTSGroups, null, array('class' => 'form-control input-sm')) !!}</div>
+                                            <div class="col-sm-5">{!! Form::submit('Add', Array('class'=>'btn btn-sm btn-success col-sm-6')) !!}</div>
                                             {!! Form::close() !!}
                                         </div>
                                     </td>
@@ -61,9 +61,9 @@
                                 <td>Corp ID</td>
                                 	<td>
                                 		<div>
-											{!! Form::open(['url' => 'admin/groups/'.$id.'/save-corpid']) !!}
-					                        {!! Form::text('corp_id', $corp_id) !!}
-					                        {!! Form::submit('Save') !!}
+											{!! Form::open(['url' => 'admin/groups/'.$id.'/save-corpid', 'class' => 'add-corporation-form']) !!}
+					                        <div class="col-sm-8">{!! Form::select('corp_id', array(''=>'None')+$menuCorporations, $corp_id, array('class' => 'form-control input-sm')) !!}</div>
+					                        <div class="col-sm-4">{!! Form::submit('Save', Array('class'=>'btn btn-sm btn-success col-sm-6')) !!}</div>
 					                        {!! Form::close() !!}
 				                        </div>
                         	        </td>
@@ -72,9 +72,9 @@
                                 <td>Alliance ID</td>
                                 	<td>
                                 		<div>
-											{!! Form::open(['url' => 'admin/groups/'.$id.'/save-allianceid']) !!}
-					                        {!! Form::text('alliance_id', $alliance_id) !!}
-					                        {!! Form::submit('Save') !!}
+											{!! Form::open(['url' => 'admin/groups/'.$id.'/save-allianceid', 'class' => 'add-alliance-form']) !!}
+					                        <div class="col-sm-8">{!! Form::select('alliance_id', array(''=>'None')+$menuAlliances, $alliance_id, array('class' => 'form-control input-sm')) !!}</div>
+                                            <div class="col-sm-4">{!! Form::submit('Save', Array('class'=>'btn btn-sm btn-success col-sm-6')) !!}</div>
 					                        {!! Form::close() !!}
 				                        </div>
                         	        </td>
@@ -82,74 +82,79 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="col-sm-6">
-                            {!! Form::open(['url' => 'admin/groups/'.$id.'/add-user', 'class' => 'add-user-form']) !!}
-                            {!! Form::select('user', array(''=>'Select user')+$menuUsers, null, array('class' => 'form-control')) !!}
-                            {!! Form::submit('Add user') !!}
-                            {!! Form::close() !!}
-                        </div>
                         <p>&nbsp;</p>
-                        @if ($admin)
-                        <h5><a href="#" id="addOwner">Add Owner:</a></h5>
-                        <div class="col-sm-6" style="display: none" id="add-owner-form-div">
-                            {!! Form::open(['url' => 'admin/groups/'.$id.'/add-owner', 'class' => 'add-owner-form']) !!}
-                            {!! Form::select('owner', array(''=>'Select user')+$menuOwners, null, array('class' => 'form-control')) !!}
-                            {!! Form::submit('Add owner') !!}
-                            {!! Form::close() !!}
+                        <div class="col-sm-5">
+                            <h4 class="col-sm-12">Group Owners</h4>
+                            @if ($admin)
+                                <div class="row">
+                                    {!! Form::open(['url' => 'admin/groups/'.$id.'/add-owner', 'class' => 'add-owner-form']) !!}
+                                    <div class="col-sm-9">{!! Form::select('owner', array(''=>'Select user')+$menuOwners, null, array('class' => 'form-control input-sm')) !!}</div>
+                                    <div class="col-sm-3">{!! Form::submit('Add', Array('class'=>'btn btn-sm btn-success col-sm-12')) !!}</div>
+                                    {!! Form::close() !!}
+                                </div>
+                            @endif
+							@if (count($owners))
+                                <table class="table table-striped table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Char Name</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                    </thead>
+                                    @foreach ($owners as $owner)
+                                        <tr>
+                                            <td class="user-id">{{ $owner->id }}</td>
+                                            <td class="char-name">{{ $owner->char_name }}</td>
+                                            <td>
+                                                {!! Form::open(['url' => 'admin/groups/'.$id.'/remove-owner', 'class' => 'owner-action-form']) !!}
+                                                {!! Form::hidden('owner', $owner->id) !!}
+                                                {!! Form::submit('Remove Owner', Array('class'=>'btn btn-xs btn-danger')) !!}
+                                                {!! Form::close() !!}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+	                        @else
+                                <div class="col-sm-12"><p>This group has no members.</p></div>
+                            @endif
                         </div>
-                        @endif
-                        @if ($admin && count($owners))
-                            <h4 class="col-sm-8">Group Owners</h4>
-                            <table class="table table-striped table-condensed">
-                                <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Char Name</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                                </thead>
-                                @foreach ($owners as $owner)
+                        <div class="col-sm-7">
+                            <h4 class="col-sm-6">Members</h4>
+                            <div class="row">
+                                {!! Form::open(['url' => 'admin/groups/'.$id.'/add-user', 'class' => 'add-user-form']) !!}
+                                <div class="col-sm-9">{!! Form::select('user', array(''=>'Select user')+$menuUsers, null, array('class' => 'form-control input-sm')) !!}</div>
+                                <div class="col-sm-3">{!! Form::submit('Add', Array('class'=>'btn btn-sm btn-success col-sm-12')) !!}</div>
+                                {!! Form::close() !!}
+                            </div>
+                            @if (count($users))
+                                <table class="table table-striped table-condensed">
+                                    <thead>
                                     <tr>
-                                        <td class="user-id">{{ $owner->id }}</td>
-                                        <td class="char-name">{{ $owner->char_name }}</td>
-                                        <td>
-                                            {!! Form::open(['url' => 'admin/groups/'.$id.'/remove-owner', 'class' => 'owner-action-form']) !!}
-                                            {!! Form::hidden('owner', $owner->id) !!}
-                                            {!! Form::submit('Remove owner') !!}
-                                            {!! Form::close() !!}
-                                        </td>
+                                        <th>Id</th>
+                                        <th>Char Name</th>
+                                        <th>Email</th>
+                                        <th>&nbsp;</th>
                                     </tr>
-                                @endforeach
-                            </table>
-                        @endif
-                        <h4 class="col-sm-8">Members</h4>
-                        @if (count($users))
-                            <table class="table table-striped table-condensed">
-                                <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Char Name</th>
-                                    <th>email</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                                </thead>
-                                @foreach ($users as $user)
-                                    <tr>
-                                        <td class="user-id">{{ $user->id }}</td>
-                                        <td class="char-name">{{ $user->char_name }}</td>
-                                        <td class="user-email">{{ $user->email }}</td>
-                                        <td>
-                                            {!! Form::open(['url' => 'admin/groups/'.$id.'/remove-user', 'class' => 'user-action-form']) !!}
-                                            {!! Form::hidden('user', $user->id) !!}
-                                            {!! Form::submit('Remove') !!}
-                                            {!! Form::close() !!}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </table>
-                        @else
-                            <div class="col-sm-12"><p>This group has no members.</p></div>
-                        @endif
+                                    </thead>
+                                    @foreach ($users as $user)
+                                        <tr>
+                                            <td class="user-id">{{ $user->id }}</td>
+                                            <td class="char-name">{{ $user->char_name }}</td>
+                                            <td class="user-email">{{ $user->email }}</td>
+                                            <td>
+                                                {!! Form::open(['url' => 'admin/groups/'.$id.'/remove-user', 'class' => 'user-action-form']) !!}
+                                                {!! Form::hidden('user', $user->id) !!}
+                                                {!! Form::submit('Remove User', Array('class'=>'btn btn-xs btn-danger')) !!}
+                                                {!! Form::close() !!}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            @else
+                                <div class="col-sm-12"><p>This group has no members.</p></div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
