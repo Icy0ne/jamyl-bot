@@ -48,7 +48,7 @@ class Kernel extends ConsoleKernel {
         $schedule->command('api:getalliances')->dailyAt('00:01');
         $schedule->command('api:getcontactlists')->twiceDaily();
         $schedule->command('api:getcorporations')->everyFiveMinutes();
-        $schedule->command('auth:refreshgrouppermissions')->everyFiveMinutes();
+        $schedule->command('jamyl:refreshgrouppermissions')->everyFiveMinutes();
         $schedule->command('ts3:checknickames')->everyFiveMinutes();
         $schedule->command('ts3:updateaccess')->everyFiveMinutes();
         $schedule->command('ts3:checknicknames')->everyFiveMinutes();

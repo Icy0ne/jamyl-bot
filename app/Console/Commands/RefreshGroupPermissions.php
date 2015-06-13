@@ -15,7 +15,7 @@ class RefreshGroupPermissions extends Command {
 	 *
 	 * @var string
 	 */
-	protected $name = 'auth:refreshgrouppermissions';
+	protected $name = 'jamyl:refreshgrouppermissions';
 	
 	/**
 	 * The console command description.
