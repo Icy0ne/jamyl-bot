@@ -41,7 +41,6 @@ class TS3Monkey {
             $this->ts3monkey->selfUpdate([
                 "client_nickname" => env('WEB_GROUP_NAME') . " Admin Bot"
             ]);
-            \Log::info("tsmonkey init");
         }
         return $this->ts3monkey;
     }
