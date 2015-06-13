@@ -7,6 +7,9 @@ $(document).ready(function(){
 	$("form.add-user-form").find("select").combobox();
     $("form.add-owner-form").find("select").combobox();
 
+    /* Focus add member input */
+    $("input[name=user]").parent().find("input[type=text]").focus()
+
 	/* Deleting Users AJAX */
 	$("form.user-action-form").submit(function(e){
 		e.preventDefault();
