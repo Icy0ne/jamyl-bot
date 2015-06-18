@@ -45,9 +45,18 @@ class CheckTeamSpeakNickames extends Command {
             $users = User::where("tsdbid", "=", $currentuser["client_database_id"])->get();
             foreach ($users as $user) {
                 if ($user->getTSName() != $currentuser["client_nickname"]) {
+                    $user->incorrect_nickname_count = $user->incorrect_nickname_count + 1;
                     $teamspeak->clientPoke($currentuser["client_database_id"], 
-                        "Wrong Nickname - Expecting " . $user->getTSName());
+                        "Wrong Nickname - Expecting " . $user->getTSName() . " - Warning " .
+                             $user->incorrect_nickname_count . "/5");
+                    if ($user->incorrect_nickname_count >= 5) {
+                        $teamspeak->clientKick($user->tsdbid, "Incorrect Nickname");
+                        $user->incorrect_nickname_count = 0;
+                    }
+                } else {
+                    $user->incorrect_nickname_count = 0;
                 }
+                $user->save();
             }
         }
     }
@@ -61,7 +70,6 @@ class CheckTeamSpeakNickames extends Command {
     {
         return [];
         // ['example', InputArgument::REQUIRED, 'An example argument.'],
-        
     }
 
     /**
@@ -73,6 +81,5 @@ class CheckTeamSpeakNickames extends Command {
     {
         return [];
         // ['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
-        
     }
 }

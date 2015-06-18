@@ -30,7 +30,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $fillable = ['char_name', 'email', 'password', 'slack_id',
         'slack_name', 'char_id', 'status', 'corp_id', 'corp_name', 'alliance_id', 'alliance_name',
-		'tsuid', 'tsdbid'];
+		'tsuid', 'tsdbid', 'incorrect_nickname_count'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
