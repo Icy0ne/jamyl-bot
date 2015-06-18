@@ -1,6 +1,6 @@
 <?php
 /**
- * Providence Slack DankFrags bot
+ * Providence Slack Killmail Bot bot
  * User: ed
  * Date: 08/05/15
  * Time: 23:27
@@ -75,10 +75,10 @@ class Killbot {
             'username'  => config('killbot.name'),
             'channel'   => $corp['channel'],
             'icon_emoji'=> config('killbot.emoji'),
-            'text' => '*Dank Frag Alert!!*',
+            'text' => '*Expensive Kill!!*',
             'attachments' => [
                 [
-                    'fallback'  => "Dank Frag ALERT!! ".$kill['victim']['characterName']." died in a ".$this->api->getTypeName($kill['victim']['shipTypeID'])." worth ".$this->formatValue($kill['zkb']['totalValue'])." -- ".config('killbot.kill_link').$kill['killID']."/",
+                    'fallback'  => "Expensive Kill!! ".$kill['victim']['characterName']." died in a ".$this->api->getTypeName($kill['victim']['shipTypeID'])." worth ".$this->formatValue($kill['zkb']['totalValue'])." -- ".config('killbot.kill_link').$kill['killID']."/",
                     'color'     => 'danger',
                     'title'     => $kill['victim']['characterName']." died in a ".$this->api->getTypeName($kill['victim']['shipTypeID'])." worth ".$this->formatValue($kill['zkb']['totalValue']),
                     'title_link'=> config('killbot.kill_link').$kill['killID']."/",
